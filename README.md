@@ -4,7 +4,7 @@ Dokumentacja mojego pierwszego projektu robotycznego o nazwie **„Nudel”**. K
 
 ## Cel projektu
 
-Głównym celem jest wejście w świat robotyki i samodzielne zbudowanie od zera mojego pierwszego pojazdu autonomicznego. Tworząc ten projekt, nauczyłem się m.in.:
+Głównym celem jest wejście w świat robotyki i samodzielne zbudowanie od zera mojego pierwszego pojazdu autonomicznego. Tworząc ten projekt nauczyłem się m.in.:
 * **Sterowania silnikami prądu stałego** za pomocą Arduino.
 * **Konfiguracji i kalibracji** czujników podczerwieni (IR).
 * **Pisania wydajnego kodu** dla robotów typu line follower.
@@ -37,6 +37,8 @@ Pliki do druku 3D znajdują się w repozytorium:
 
 *Wskazówka:* Jeśli nie dysponujesz drukarką 3D, możesz pominąć te elementy. Zamiast drukowanej podstawki pod Arduino można użyć gotowej wersji ze sklepu lub przykręcić płytkę bezpośrednio do podwozia, a jako dystansów pod czujniki użyć klasycznych metalowych lub plastikowych podkładek.
 
+---
+
 ## Napotkane problemy
 
 ### 1. Brak i zły dobór sterownika silników (Mostka H)
@@ -47,3 +49,45 @@ Po złożeniu robota i rozpoczęciu testów pojawił się poważny problem. Ukł
 Warto dodać, że przy konstrukcji typu 2WD (z dwoma silnikami) ten sterownik bez problemu dałby sobie radę, jednak zależało mi na napędzie 4WD, który wymaga znacznie więcej mocy.
 
 **Rozwiązanie:** Musiałem rozmontować robota, zrezygnować ze starego sterownika i zamówić wydajniejszy układ – wybór padł na **DRV8833**. Obecnie czekam na dostawę części, aby dokończyć ten etap projektu.
+
+### 2. Zła długość i niska jakość przewodów
+Do projektu użyłem przewodów, które dawno temu zamówiłem na AliExpress. Niestety okazały się bardzo słabej jakości – podczas lutowania końcówki wręcz się paliły, a sam rdzeń miał dziwny, miedziany kolor, jakby był jedynie pomalowany. 
+
+Dodatkowo niechcący przyciąłem zbyt krótkie kawałki. Przez to lutowanie było bardzo utrudnione, a kable po montażu były mocno napięte. Ostatecznie, gdy wydawało się, że wszystko już działa, przewody pod wpływem naprężenia same się ukręcały i wyrywały z połączeń.
+
+**Rozwiązanie:** Przy projektach DIY zawsze warto inwestować w sprawdzone przewody dobrej jakości (np. silikonowe) oraz ucinać je z odpowiednim zapasem.
+
+### 3. Brak wcześniejszego prototypowania
+Wszystkie elementy montowałem i lutowałem od razu na gotowo ("na żywca"). Przez brak wcześniejszego sprawdzenia układu na płytce stykowej popełniłem kilka błędów, których łatwo można było uniknąć. 
+
+**Rozwiązanie:** Zawsze warto zacząć od stworzenia prostego prototypu na płytce stykowej (breadboardzie) przed ostatecznym lutowaniem i montażem.
+
+---
+
+## Proces budowy robota
+
+### 1. Złożenie podwozia
+
+![Zdjęcie_1](zdjęcie_1.jpg)
+
+Prace zacząłem od zamontowania przekładni TT, kół, silników oraz czujników IR. 
+
+Z plastikowym podwoziem wiąże się zabawna historia. Dopiero po pełnym złożeniu konstrukcji zorientowałem się, że podwozie jest w rzeczywistości przezroczyste! Wcześniej byłem przekonany, że jego docelowym kolorem jest brązowy – okazało się, że była to jedynie papierowa folia ochronna. Musiałem więc rozmontować całość tylko po to, by ją zerwać. 
+
+Podczas montażu zapomniałem również o założeniu gumowych elementów zabezpieczających na silniki (łączących je z przekładniami TT). Zorientowałem się dopiero na samym końcu i musiałem instalować je przy pomocy pęsety na gotowym robocie. Jak się później okazało – i tak czekał mnie ponowny demontaż z powodu wymiany sterownika silników, ale wtedy jeszcze o tym nie wiedziałem.
+
+#### Moje wskazówki z tego etapu (Pro Tips):
+* **Wiercenie w akrylu:** Podczas wiercenia otworów na czujniki IR dwukrotnie pękło mi plastikowe podwozie (na szczęście uratowałem sytuację klejem kropelką). Gdy później musiałem wywiercić otwory pod Arduino, postanowiłem najpierw delikatnie podgrzać plastik. Odkryłem, że po podgrzaniu tworzywa do około 200–250°C staje się ono bardziej elastyczne i nie pęka podczas wiercenia. To uratowało podwozie przed dalszymi uszkodzeniami.
+* **Pozycja czujników IR:** Początkowo czujniki były zamontowane bezpośrednio na płaskim podwoziu. Podczas testów okazało się, że są zbyt wysoko, dlatego zaprojektowałem i wydrukowałem specjalne dystanse. Dzięki nim czujniki znajdują się tuż nad ziemią, co znacznie poprawiło precyzję wykrywania czarnej linii.
+
+*(Zdjęcia z procesu budowy przedstawiają robota już po wprowadzeniu poprawek konstrukcyjnych, w trakcie oczekiwania na nowy sterownik silników).*
+
+
+
+
+
+
+
+
+
+
