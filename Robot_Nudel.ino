@@ -14,14 +14,39 @@ void setup() {
   pinMode(IR_Lewy, INPUT);
   pinMode(IR_Srodek_Lewy, INPUT);
   pinMode(IR_Srodek_Prawy, INPUT);
-  pinMode(IN_Prawy, INPUT);
+  pinMode(IR_Prawy, INPUT);
 
-  pinMode()
+  pinMode(AIN1, OUTPUT);
+  pinMode(AIN2, OUTPUT);
+  pinMode(BIN1, OUTPUT);
+  pinMode(BIN2, OUTPUT);
 
+  digitalWrite(AIN1, LOW);
+  digitalWrite(AIN2, LOW);
+  digitalWrite(BIN1, LOW);
+  digitalWrite(BIN2, LOW);
 
+  Serial.begin(9600);
+  Serial.println("Start");
 }
 
 void loop() {
-  // put your main code here, to run repeatedly:
+  doPrzodu();
+  delay(1000);
+  stop();
+  delay(100000);
+}
 
+void doPrzodu () {
+  analogWrite(AIN1, 150);
+  analogWrite(BIN1, 150);
+  digitalWrite(AIN2, LOW);
+  digitalWrite(BIN2, LOW);
+}
+
+void stop() {
+  digitalWrite(AIN1, LOW);
+  digitalWrite(AIN2, LOW);
+  digitalWrite(BIN1, LOW);
+  digitalWrite(BIN2, LOW);
 }
