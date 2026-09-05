@@ -5,10 +5,10 @@
 #define IR_Prawy 2
 
 // Piny silników
-#define AIN1 5
-#define AIN2 3
-#define BIN1 6
-#define BIN2 9
+#define LIN1 5
+#define LIN2 3
+#define RIN1 9
+#define RIN2 6
 
 void setup() {
   pinMode(IR_Lewy, INPUT);
@@ -16,37 +16,81 @@ void setup() {
   pinMode(IR_Srodek_Prawy, INPUT);
   pinMode(IR_Prawy, INPUT);
 
-  pinMode(AIN1, OUTPUT);
-  pinMode(AIN2, OUTPUT);
-  pinMode(BIN1, OUTPUT);
-  pinMode(BIN2, OUTPUT);
+  pinMode(LIN1, OUTPUT);
+  pinMode(LIN2, OUTPUT);
+  pinMode(RIN1, OUTPUT);
+  pinMode(RIN2, OUTPUT);
 
-  digitalWrite(AIN1, LOW);
-  digitalWrite(AIN2, LOW);
-  digitalWrite(BIN1, LOW);
-  digitalWrite(BIN2, LOW);
+  digitalWrite(LIN1, LOW);
+  digitalWrite(LIN2, LOW);
+  digitalWrite(RIN1, LOW);
+  digitalWrite(RIN2, LOW);
 
   Serial.begin(9600);
   Serial.println("Start");
 }
 
 void loop() {
-  doPrzodu();
-  delay(1000);
-  stop();
-  delay(100000);
+  if (digitalRead(IR_Srodek_Prawy) == HIGH && digitalRead(IR_Srodek_Lewy) == HIGH) {
+    doPrzodu();
+  } else if (digitalRead(IR_Srodek_Prawy) == HIGH) {
+    lekkoLewo();
+  } else if (digitalRead(IR_Srodek_Lewy) == HIGH) {
+    lekkoPrawo();
+  } else if (digitalRead(IR_Prawy) == HIGH) {
+    lewo();
+  } else if (digitalRead(IR_Lewy) == HIGH) {
+    prawo();
+  } else if (digitalRead(IR_Srodek_Prawy) == HIGH && digitalRead(IR_Srodek_Lewy) == HIGH && digitalRead(IR_Prawy) == HIGH && digitalRead(IR_Lewy) == HIGH) {
+    stop();
+  }
+
 }
 
 void doPrzodu () {
-  analogWrite(AIN1, 150);
-  analogWrite(BIN1, 150);
-  digitalWrite(AIN2, LOW);
-  digitalWrite(BIN2, LOW);
+  analogWrite(LIN1, 60);
+  analogWrite(RIN1, 60);
+  digitalWrite(LIN2, LOW);
+  digitalWrite(RIN2, LOW);
+  delay(0);
+}
+
+void lekkoPrawo() {
+  analogWrite(LIN1, 80);
+  analogWrite(RIN1, 20);
+  digitalWrite(LIN2, LOW);
+  digitalWrite(RIN2, LOW);
+  delay(0);
+}
+
+void lekkoLewo() {
+  analogWrite(LIN1, 20);
+  analogWrite(RIN1, 80);
+  digitalWrite(LIN2, LOW);
+  digitalWrite(RIN2, LOW);
+  delay(0);
+}
+
+void lewo(){
+  analogWrite(LIN1, 10);
+  analogWrite(RIN1, 100);
+  digitalWrite(LIN2, LOW);
+  digitalWrite(RIN2, LOW);
+  delay(0);
+}
+
+void prawo(){
+  analogWrite(LIN1, 100);
+  analogWrite(RIN1, 10);
+  digitalWrite(LIN2, LOW);
+  digitalWrite(RIN2, LOW);
+  delay(0);
 }
 
 void stop() {
-  digitalWrite(AIN1, LOW);
-  digitalWrite(AIN2, LOW);
-  digitalWrite(BIN1, LOW);
-  digitalWrite(BIN2, LOW);
+  digitalWrite(LIN1, LOW);
+  digitalWrite(LIN2, LOW);
+  digitalWrite(RIN1, LOW);
+  digitalWrite(RIN2, LOW);
+
 }
