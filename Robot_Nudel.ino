@@ -31,7 +31,10 @@ void setup() {
 }
 
 void loop() {
-  if (digitalRead(IR_Srodek_Prawy) == HIGH && digitalRead(IR_Srodek_Lewy) == HIGH) {
+  // Algorytm sterowania
+  if (digitalRead(IR_Srodek_Prawy) == HIGH && digitalRead(IR_Srodek_Lewy) == HIGH && digitalRead(IR_Prawy) == HIGH && digitalRead(IR_Lewy) == HIGH) {
+    stop();
+  } else if (digitalRead(IR_Srodek_Prawy) == HIGH && digitalRead(IR_Srodek_Lewy) == HIGH) {
     doPrzodu();
   } else if (digitalRead(IR_Srodek_Prawy) == HIGH) {
     lekkoLewo();
@@ -41,15 +44,16 @@ void loop() {
     lewo();
   } else if (digitalRead(IR_Lewy) == HIGH) {
     prawo();
-  } else if (digitalRead(IR_Srodek_Prawy) == HIGH && digitalRead(IR_Srodek_Lewy) == HIGH && digitalRead(IR_Prawy) == HIGH && digitalRead(IR_Lewy) == HIGH) {
+  } else {
     stop();
   }
 
 }
 
+// Sterowanie
 void doPrzodu () {
-  analogWrite(LIN1, 60);
-  analogWrite(RIN1, 60);
+  analogWrite(LIN1, 50);
+  analogWrite(RIN1, 50);
   digitalWrite(LIN2, LOW);
   digitalWrite(RIN2, LOW);
   delay(0);
@@ -57,14 +61,14 @@ void doPrzodu () {
 
 void lekkoPrawo() {
   analogWrite(LIN1, 80);
-  analogWrite(RIN1, 20);
+  analogWrite(RIN1, 0);
   digitalWrite(LIN2, LOW);
   digitalWrite(RIN2, LOW);
   delay(0);
 }
 
 void lekkoLewo() {
-  analogWrite(LIN1, 20);
+  analogWrite(LIN1, 0);
   analogWrite(RIN1, 80);
   digitalWrite(LIN2, LOW);
   digitalWrite(RIN2, LOW);
@@ -72,18 +76,18 @@ void lekkoLewo() {
 }
 
 void lewo(){
-  analogWrite(LIN1, 10);
-  analogWrite(RIN1, 100);
-  digitalWrite(LIN2, LOW);
+  analogWrite(LIN2, 100);
+  analogWrite(RIN1, 110);
+  digitalWrite(LIN1, LOW);
   digitalWrite(RIN2, LOW);
   delay(0);
 }
 
 void prawo(){
-  analogWrite(LIN1, 100);
-  analogWrite(RIN1, 10);
+  analogWrite(LIN1, 110);
+  analogWrite(RIN2, 100);
   digitalWrite(LIN2, LOW);
-  digitalWrite(RIN2, LOW);
+  digitalWrite(RIN1, LOW);
   delay(0);
 }
 
